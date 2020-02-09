@@ -1,9 +1,7 @@
 var db = require('./db');
 
-db.foo();
-
 async function test() {
-    await db.getUserTable();
+    await console.log(await db.getUserTable());
     db.disconnect();
 }
 
