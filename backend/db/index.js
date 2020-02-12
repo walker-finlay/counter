@@ -37,7 +37,7 @@ module.exports = {
             } finally {
                 client.release(); /* NB: always release clients back */
             }
-        })
+        })().catch(e => console.error(e.stack));
     },
     /* Get a username */
     /* Get a u_id */
@@ -49,9 +49,33 @@ module.exports = {
             .then(res => { return res.rows })
             .catch(e => console.log(e));
     },
-
     /* Add a counter */
+    addCounter(u_id, value) {
+        const text = 'INSERT INTO counter VALUES (default, $1, $2) RETURNING *';
+        /* Probably want to return some kind of status message */
+        return pool
+            .query(text, [u_id, value])
+            .then(() => {
+                if (res.rows) console.log('counter added');
+            })
+            .catch(e => console.error(e.stack));
+    },
     /* Get a counter */
+    getCounter(c_id) {
+        const text = 'SELECT * FROM counter WHERE c_id = $1';
+        return pool
+            .query(text, c_id)
+            .then(res => { return res.rows })
+            .catch(e => console.error(e.stack));
+    },
+    /* Get counters for a u_id */
+    getUserCounters(u_id) {
+        const text = 'SELECT * FROM counter WHERE u_id = $1';
+        return pool
+            .query(text, u_id)
+            .then(res => { return res.rows })
+            .catch(e => console.error(e.stack));
+    },
     /* Increment or decrement a counter */
     /* Remove a counter */
     getCounterTable() {
