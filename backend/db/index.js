@@ -39,17 +39,28 @@ module.exports = {
             }
         })().catch(e => console.error(e.stack));
     },
-    /* Get a username */
-    /* Get a u_id */
+    getUserName(name) {
+        const text = 'SELECT * FROM usertable WHERE username = $1';
+        return pool
+            .query(text, [name])
+            .then(res => { return res.rows })
+            .catch(e => console.error(e.stack));
+    },
+    getUID(u_id) {
+        const text = 'SELECT * FROM usertable WHERE u_id = $1';
+        return pool
+            .query(text, [u_id])
+            .then(res => { return res.rows })
+            .catch(e => console.error(e.stack));
+    },
     /* Edit a user? */
-    /* Remove a user */
+    /* Remove a user? */
     getUserTable() {
         return pool
             .query('SELECT * FROM usertable')
             .then(res => { return res.rows })
-            .catch(e => console.log(e));
+            .catch(e => console.error(e.stack));
     },
-    /* Add a counter */
     addCounter(u_id, value) {
         const text = 'INSERT INTO counter VALUES (default, $1, $2) RETURNING *';
         /* Probably want to return some kind of status message */
@@ -60,11 +71,10 @@ module.exports = {
             })
             .catch(e => console.error(e.stack));
     },
-    /* Get a counter */
     getCounter(c_id) {
         const text = 'SELECT * FROM counter WHERE c_id = $1';
         return pool
-            .query(text, c_id)
+            .query(text, [c_id])
             .then(res => { return res.rows })
             .catch(e => console.error(e.stack));
     },
@@ -72,17 +82,35 @@ module.exports = {
     getUserCounters(u_id) {
         const text = 'SELECT * FROM counter WHERE u_id = $1';
         return pool
-            .query(text, u_id)
+            .query(text, [u_id])
             .then(res => { return res.rows })
             .catch(e => console.error(e.stack));
     },
-    /* Increment or decrement a counter */
+    /**
+     * Increment or decrement a counter 
+     * delta should be in {-1, 1}
+     */
+    updateCounter(c_id, delta) {
+        const text = 'UPDATE counter SET value = value + $1 WHERE c_id = $2';
+        pool
+            .query(text, [delta, c_id])
+            .then(console.log('counter changed'))
+            .catch(e => { console.error(e.stack) });
+    },
     /* Remove a counter */
     getCounterTable() {
         return pool
             .query('SELECT * FROM counter')
             .then(res => { return res.rows })
-            .catch(e => console.log(e))
+            .catch(e => console.error(e.stack))
+    },
+    deleteCounter(c_id) {
+        // Is this method even necessary?
+        const text = 'DELETE FROM counter WHERE c_id = $1';
+        pool
+            .query(text, [c_id])
+            .then(console.log('counter deleted'))
+            .catch(e => { console.error(e.stack) })
     },
     disconnect() {
         pool.end().then(() => { console.log('pool has ended.') });
