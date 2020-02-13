@@ -13,41 +13,50 @@ var passwordHash = require('password-hash');
 
 // POST route for a new user
 app.post('/new_user', function (req, res) {
-    var hashed_pwd = passwordHash.generate(req.password);
-    db.addUser(req.name, hashed_pwd, req.counter); // see 1 ??
+    var obj = JSON.parse(req);
+    var passhash = passwordHash.generate(obj.password);
+    db.addUser(obj.name, passhash, obj.counterval);
+    res.status(200);
+    res.send("Ok");
 })
 
 // POST route for logging in
 app.post('/login', function(req, res) {
-    var hashed_pwd = passwordHash.generate(req.password);
+    var obj = JSON.parse(req);
+    var hashed_pwd = passwordHash.generate(obj.password);
     // login
+    res.status(200);
+    res.send("Ok");
 })
 
 // POST to add a new counter for existing user
 app.post('/new_counter', function(req, res) {
-    db.addCounter(req.u_id, req.value);
+    var obj = JSON.parse(req);
+    db.addCounter(obj.u_id, obj.value);
+    res.status(200);
+    res.send("Ok");
 })
 
 // GET to get the counter(s) of existing users
 app.get('/get_counters', function(req, res) {
-
-    res.json(getCounter(req.id)); // 3 ??
+    var obj = JSON.parse(req);
+    var toReturn = db.getUserCounters(obj.u_id);
+    res.status(200);
+    res.json(toReturn);
 })
 
 // PUT route to increment a counter
 app.put('/increment_counter', function(req, res) {
-    // increment the counter
-    // probably take in the user_id & counter_id and just increment in method
+    var obj = JSON.parse(req);
+    db.updateCounter(obj.c_id, 1);
+    res.status(200);
+    res.send("Ok");
 })
 
-// PUT route to decrement a counter
-app.put('/increment_counter', function(req, res) {
-    // decrement the counter
-    // probably take in the user_id & counter_id and just decrement in method
-})
-
+// route to delete a users counter
 app.delete('/delete_counter', function(req, res) {
-    // delete an existing users counter
+    var obj = JSON.parse(req);
+    deleteCounter(obj.c_id);
+    res.status(200);
+    res.send("Ok");
 })
-
-// route to share the counter -- no clue
