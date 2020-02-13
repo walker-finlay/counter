@@ -39,6 +39,13 @@ module.exports = {
             }
         })().catch(e => console.error(e.stack));
     },
+    getPass(name){
+        const text = 'SELECT passhash FROM usertable WHERE username = $1';
+        return pool
+            .query(text, [name])
+            .then(res => {return res.rows})
+            .catch(e => console.error(e.stack));
+    },
     getUserName(name) {
         const text = 'SELECT * FROM usertable WHERE username = $1';
         return pool
