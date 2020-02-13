@@ -4,13 +4,6 @@ var app = express();
 var db = require('./db');
 var passwordHash = require('password-hash');
 
-
-// Questions
-// 1- how to get data when it's sent -- create a class to take data in like in 216?
-// 2- how to return data -- should I return a "success" or something when there's no actual data to return? SimpleRequest
-//                       -- create a class for it StructuredResponse type of dealio?
-// 3- how to take in data from the methods in index.js
-
 // POST route for a new user
 app.post('/new_user', function (req, res) {
     var obj = JSON.parse(req);
