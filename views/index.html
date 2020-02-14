@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
-    <!--<script type = 'text/javascript' src = "file:///C:/Users/wesre/Downloads/280/cap-3/counter/routes/count.js"></script>-->
-    <!--<script src = "main.js"></script> -->
     <script>
         window.onload = async function() {
-        var x = 0;
-console.log("working")
-document.getElementById("increment").addEventListener("click", async function (){
-console.log("increment works");
-x = x+1;
-document.getElementById("cnum").innerHTML = x;
+            var x = 0;
+            console.log("working")
+            document.getElementById("increment").addEventListener("click", async function (){
+                console.log("increment works");
+                x = x+1;
+                $.ajax({
+                        type: "PUT",
+                        url: "/increment_counter",
+                        dataType: "json",
+                        data: JSON.stringify({name: document.getElementById("user").value}),
+                        success: onsuccess,
+                });
+                document.getElementById("cnum").innerHTML = x;
+            });
 
-});
-
-document.getElementById("decrement").addEventListener("click", async function (){
-    console.log("decrement works");
-    x = x-1;
-    document.getElementById("cnum").innerHTML = x;
-
-});
-};
+            document.getElementById("decrement").addEventListener("click", async function (){
+                console.log("decrement works");
+                x = x-1;
+                $.ajax({
+                    type: "PUT",
+                    url: "/decrement_counter",
+                    dataType: "json",
+                    data: JSON.stringify({name: document.getElementById("user").value}),
+                    success: onsuccess,
+                });
+            });
+            function onsuccess(data) {
+                if (!(data === "ok")) {
+                    alert("error in request to server");
+                } else {
+                    document.getElementById("cnum").innerHTML = x;
+                }
+            };
+        };
     </script>
 
-<head>
-    <body>
-        <script>
-           // document.getElementById("user").innerHTML = getElementById("uname").value;
-        </script>
-        <h1 id = "user">travis</h1>
-        <h2 id ="cnum">count number</h2>
-        <h3> sum text</h3>
-        <button id ="increment" type="button">Increment</button>
-        <button id ="decrement" type="button">Decrement</button>
-        <button id ="new" type="button">New</button>
-
-        
-
-      <!--  <script>
-            function counter() {
-    document.getElementById("increment").innerHTML = "";
-}
-        </script>
-    -->
-    </body>
-</head>
-
+    <head>
+        <body>
+            <h1 id = "user"></h1>
+            <h2 id ="cnum">count number</h2>
+            <h3> sum text</h3>
+            <button id ="increment" type="button">Increment</button>
+            <button id ="decrement" type="button">Decrement</button>
+            <button id ="new" type="button">New</button>
+        </body>
+    </head>
 </html>

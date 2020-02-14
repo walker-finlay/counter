@@ -4,17 +4,29 @@
     <script type="text/javascript">
         function signUp(){
     
-if (document.getElementById("pword").value == document.getElementById("pword2").value){
-    console.log("passwords match!");
-    alert("Account succesfully made!")
-    window.location.href='/';
-}
-else{
-    console.log("incorrect");
-    alert("Passwords dont match");
-}
-
-}
+            if (document.getElementById("pword").value == document.getElementById("pword2").value){
+                console.log("passwords match!");
+                $.ajax({
+                    type: "POST",
+                    url: "/new_user",
+                    dataType: "json",
+                    data: JSON.stringify({name: document.getElementById("uname").value, password: document.getElementById("pword").value, counterval: 0}),
+                    success: onsuccess,
+                });
+            }
+            else {
+                console.log("incorrect");
+                alert("Passwords dont match");
+            }
+        }
+        function onsuccess(data) {
+            if (!(data === "ok")) {
+                alert("error in request to server");
+            } else {
+                alert("Account succesfully made!");
+                window.location.href='/';
+            }
+        }
     </script>
   <form>
     <label for="uname">UserName:</label>

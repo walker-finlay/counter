@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <!--<script type = 'text/javascript' src = 'file:///C:/Users/wesre/Downloads/280/cap-3/counter/routes/count.js'></script>-->
-  <!--<script type="text/javascript">
-       function logsIn(){
-        console.log("logsIn activated");
-        document.getElementById("user").innerHTML() = document.getElementById("uname").value;
-        window.location.href='/index';
-       }
+    <script>
+      function login() {
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            dataType: "json",
+            data: JSON.stringify({u_name: document.getElementById("uname").value, password: document.getElementById("pword").value}),
+            success: onsuccess
+        });
+      }
+      function onsuccess(data) {
+        if (!(data === "ok")) {
+            alert("error in request to server");
+        } else {
+          window.location.href='/index';
+        }
+      };
   </script>
--->
-  
-    <form>
-    <label for="uname">UserName:</label>
+  <form>
+  <label for="uname">UserName:</label>
   <input type="text" id="uname" name="uname"><br><br>
   <label for="pword">Password:</label>
   <input type="text" id="pword" name="pword"><br><br>
   <!--<button id = "submit" onclick = "logsIn()"type="button">Login</button>-->
-  <button id = "submit" onclick = "window.location.href='/index'"type="button">Login</button>
+  <button id = "submit" onclick = "login()"type="button">Login</button>
   <button id ="signup" onclick = "window.location.href='/signup'" type="button">Sign up</button>
 </form>
-
-
-
 
 </body>
 </html>
