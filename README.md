@@ -20,4 +20,10 @@ Meeting was tough to get everybody in the same place at the same time so we ende
 4. What would you do differently for the rest of your capstone work?
 I think starting earlier would have solved the previous problem discussed of not being able to meet all together, as well as we simply ran out of time at the end.  Going into future work in capstone we will definitely schedule meeting times earlier and more efficiently
 
-
+## Technologies
+* We're using heroku and a Postgres database,
+* node js for the backend
+* the database connection instance is also a node module
+  * Use environment variables to connect
+* javascript for the frontend 
+* npm is our package manager
