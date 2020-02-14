@@ -10,9 +10,19 @@ var app = express();
 
 app.get('/', function (req, res) {
 
+  res.sendFile(__dirname + '/views/login.html');
+  
+  
+});
+
+
+
+app.get('/signup', function (req, res) {
+  res.sendFile(__dirname + '/views/signup.html');
+});
+
+app.get('/index', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
-  
-  
 });
 
 app.listen(3000, function () {

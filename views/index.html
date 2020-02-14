@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
     <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
-
-    <script type = 'text/javascript' src = 'file:///C:/Users/wesre/Downloads/280/capstone-2/routes/count.js'></script>
+    <!--<script type = 'text/javascript' src = "file:///C:/Users/wesre/Downloads/280/cap-3/counter/routes/count.js"></script>-->
     <!--<script src = "main.js"></script> -->
+    <script>
+        window.onload = async function() {
+        var x = 0;
+console.log("working")
+document.getElementById("increment").addEventListener("click", async function (){
+console.log("increment works");
+x = x+1;
+document.getElementById("cnum").innerHTML = x;
+
+});
+
+document.getElementById("decrement").addEventListener("click", async function (){
+    console.log("decrement works");
+    x = x-1;
+    document.getElementById("cnum").innerHTML = x;
+
+});
+};
+    </script>
+
 <head>
     <body>
-        <h1>working html index!</h1>
+        <script>
+           // document.getElementById("user").innerHTML = getElementById("uname").value;
+        </script>
+        <h1 id = "user">travis</h1>
         <h2 id ="cnum">count number</h2>
-        <button id ="increment" type="button">Counter</button>
+        <h3> sum text</h3>
+        <button id ="increment" type="button">Increment</button>
+        <button id ="decrement" type="button">Decrement</button>
+        <button id ="new" type="button">New</button>
 
         
 
