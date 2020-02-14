@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+      function login() {
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            dataType: "json",
+            data: JSON.stringify({u_name: document.getElementById("uname").value, password: document.getElementById("pword").value}),
+            success: onsuccess
+        });
+      }
+      function onsuccess(data) {
+        if (!(data === "ok")) {
+            alert("error in request to server");
+        } else {
+          window.location.href='/index';
+        }
+      };
+  </script>
+  <form>
+  <label for="uname">UserName:</label>
+  <input type="text" id="uname" name="uname"><br><br>
+  <label for="pword">Password:</label>
+  <input type="text" id="pword" name="pword"><br><br>
+  <!--<button id = "submit" onclick = "logsIn()"type="button">Login</button>-->
+  <button id = "submit" onclick = "login()"type="button">Login</button>
+  <button id ="signup" onclick = "window.location.href='/signup'" type="button">Sign up</button>
+</form>
+
+</body>
+</html>
