@@ -17,7 +17,14 @@ app.post('/new_user', function (req, res) {
 app.post('/login', function(req, res) {
     var obj = JSON.parse(req);
     var hashed_pwd = passwordHash.generate(obj.password);
-    // login
+    var checkPass = db.getPass(obj.u_name) // CHECK THIS !!!
+    if (checkPass == hashed_pwd) {
+        res.status(200);
+        res.send("Ok");
+    } else {
+        res.send("Invalid Login");
+    }
+    // how to login ???
     res.status(200);
     res.send("Ok");
 })
