@@ -53,6 +53,14 @@ app.put('/increment_counter', function(req, res) {
     res.send("Ok");
 })
 
+// PUT route to decrement a counter
+app.put('/decrement_counter', function(req, res) {
+    var obj = JSON.parse(req);
+    db.updateCounter(obj.c_id, -1);
+    res.status(200);
+    res.send("Ok");
+})
+
 // route to delete a users counter
 app.delete('/delete_counter', function(req, res) {
     var obj = JSON.parse(req);
