@@ -1,5 +1,13 @@
 # counter
 Mini-project
+Herkoku Link: https://cse280-counter.herokuapp.com/
+
+you can run frontend locally with these steps in your terminal
+
+npm install
+npm init
+npm intall express --save
+node main.js
 
 Sprint Questions
 
@@ -11,3 +19,5 @@ Our project was divided into what each person was strongest in, which worked out
 Meeting was tough to get everybody in the same place at the same time so we ended up not meeting as a full group in person more than twice.  We also ran out of time towards the end.
 4. What would you do differently for the rest of your capstone work?
 I think starting earlier would have solved the previous problem discussed of not being able to meet all together, as well as we simply ran out of time at the end.  Going into future work in capstone we will definitely schedule meeting times earlier and more efficiently
+
+
