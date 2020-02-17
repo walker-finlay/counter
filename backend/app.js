@@ -83,6 +83,6 @@ app.delete('/delete_counter', function(req, res) {
     res.send("Ok");
 })
 
-app.listen(3000, function() {
+app.listen(function() {
     console.log('its workin');
 });
