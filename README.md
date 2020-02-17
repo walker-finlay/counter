@@ -3,12 +3,12 @@ Mini-project
 Herkoku Link: https://cse280-counter.herokuapp.com/
 
 you can run frontend locally with these steps in your terminal
-
+```
 npm install
 npm init
 npm intall express --save
 node main.js
-
+```
 Sprint Questions
 
 1. What was the final state of your project after one week?
