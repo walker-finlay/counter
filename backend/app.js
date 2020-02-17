@@ -4,8 +4,22 @@ var app = express();
 var db = require('./db');
 var passwordHash = require('password-hash');
 
+
+//Create HTTP server and listen on port 3000 for requests
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/views/login.html');
+});
+
+app.get('/signup', function(req, res) {
+    res.sendFile(__dirname + '/views/signup.html');
+});
+
+app.get('/index', function(req, res) {
+    res.sendFile(__dirname + '/views/index.html');
+});
+
 // POST route for a new user
-app.post('/new_user', function (req, res) {
+app.post('/new_user', function(req, res) {
     var obj = JSON.parse(req);
     var passhash = passwordHash.generate(obj.password);
     db.addUser(obj.name, passhash, obj.counterval);
@@ -68,3 +82,7 @@ app.delete('/delete_counter', function(req, res) {
     res.status(200);
     res.send("Ok");
 })
+
+app.listen(3000, function() {
+    console.log('its workin');
+});
