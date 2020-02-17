@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        function signUp() {
+
+            if (document.getElementById("pword").value == document.getElementById("pword2").value) {
+                console.log("passwords match!");
+                $.ajax({
+                    type: "POST",
+                    url: "/new_user",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        name: document.getElementById("uname").value,
+                        password: document.getElementById("pword").value,
+                        counterval: 0
+                    }),
+                    success: onsuccess,
+                });
+            } else {
+                console.log("incorrect");
+                alert("Passwords dont match");
+            }
+        }
+
+        function onsuccess(data) {
+            if (!(data === "ok")) {
+                alert("error in request to server");
+            } else {
+                alert("Account succesfully made!");
+                window.location.href = '/';
+            }
+        }
+    </script>
+    <form>
+        <label for="uname">UserName:</label>
+        <input type="text" id="uname" name="uname"><br><br>
+        <label for="pword">Password:</label>
+        <input type="text" id="pword" name="pword"><br><br>
+        <label for="pword2">Repeat Password:</label>
+        <input type="text" id="pword2" name="pword2"><br><br>
+        <button id="signup" onclick="signUp()" type="button">Sign up</button>
+    </form>
+
+    <script>
+        // FIXME: what is this?
+        document.getElementById("user").innerHTML() = document.getElementById("uname").value;
+    </script>
+
+
+</body>
+
+</html>
