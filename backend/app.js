@@ -83,6 +83,8 @@ app.delete('/delete_counter', function(req, res) {
     res.send("Ok");
 })
 
-app.listen(function() {
+var port = (process.env.PORT || 3000);
+
+app.listen(port, function() {
     console.log('its workin');
 });
